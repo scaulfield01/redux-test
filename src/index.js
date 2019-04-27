@@ -3,16 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import store from './store';
+import {bindActionCreators} from 'redux';
+import {updateCurrent} from './reducers/todo';
 
+// const todoChangeHandler = (val) => 
+// 	store.dispatch(updateCurrent(val))
 
-const state = {
-	todos: [
-		{id:1, name: "static 1 ", isComplete: true},
-		{id:2, name: "static 2 ", isComplete: true},
-		{id:3, name: "static 3 ", isComplete: true}
-	]
+const actions = bindActionCreators({updateCurrent}, store.dispatch)
+
+const render = () => {
+  const state = store.getState()
+  ReactDOM.render(<App todos={state.todos}
+    currentTodo={state.currentTodo}
+    changeCurrent={actions.updateCurrent}
+     />,
+  document.getElementById('root'));
 }
+render()
 
+store.subscribe(render)
 
-ReactDOM.render(<App todos={state.todos} />, document.getElementById('root'));
 serviceWorker.unregister();
