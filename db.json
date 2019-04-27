@@ -1,64 +1,14 @@
 {
   "todos": [
     {
-      "id": 1,
-      "name": "configure server",
-      "isComplete": false
-    },
-    {
-      "id": 2,
-      "name": "start server",
-      "isComplete": false
-    },
-    {
       "id": 3,
       "name": "Load data into app",
-      "isComplete": false
-    },
-    {
-      "id": 4,
-      "name": "Add records",
-      "isComplete": false
-    },
-    {
-      "id": 5,
-      "name": "update records",
-      "isComplete": false
+      "isComplete": true
     },
     {
       "name": "poop",
-      "isComplete": false,
-      "id": 6
-    },
-    {
-      "name": "hats",
       "isComplete": true,
-      "id": 7
-    },
-    {
-      "name": "dw",
-      "isComplete": true,
-      "id": 8
-    },
-    {
-      "name": "d",
-      "isComplete": false,
-      "id": 9
-    },
-    {
-      "name": "s",
-      "isComplete": true,
-      "id": 10
-    },
-    {
-      "name": "fe",
-      "isComplete": true,
-      "id": 11
-    },
-    {
-      "name": "dfdf",
-      "isComplete": true,
-      "id": 12
+      "id": 4
     }
   ]
 }

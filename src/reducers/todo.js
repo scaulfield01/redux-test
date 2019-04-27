@@ -1,4 +1,4 @@
-import {getTodos, createTodo, updateTodo} from '../lib/todoServices'
+import {getTodos, createTodo, updateTodo, destroyTodo} from '../lib/todoServices'
 import {showMessage} from './messages'
 const initState = {
   todos: [],
@@ -9,11 +9,14 @@ const CURRENT_UPDATE = 'CURRENT_UPDATE';
 export const TODOS_LOAD = 'TODOS_LOAD'
 export const TODO_ADD = 'TODO_ADD';
 export const TODO_REPLACE = 'TODO_REPLACE'
+export const TODO_REMOVE = 'TODO_REMOVE'
 
 export const updateCurrent = (val) => ({type:CURRENT_UPDATE, payload: val})
 export const loadTodos = (todos) => ({type: TODOS_LOAD, payload: todos})
 export const addTodo = (todo) => ({type: TODO_ADD, payload: todo})
 export const replaceTodo = (todo) => ({type: TODO_REPLACE, payload: todo})
+export const removeTodo = (id) => ({type: TODO_REMOVE, payload: id})
+
 export const fetchTodos = () => {
   return (dispatch) =>{
     dispatch(showMessage('Loading Todos'))
@@ -41,6 +44,15 @@ export const toggleTodo = (id) => {
   }
 }
 
+export const deleteTodo = (id) => {
+  return (dispatch) => {
+    dispatch(showMessage('Removing Todo'))
+    destroyTodo(id)
+      .then(() => dispatch(removeTodo(id)))
+  }
+}
+
+
 export default (state = initState, action) => {
   switch (action.type) {
     case TODO_ADD:
@@ -53,6 +65,10 @@ export default (state = initState, action) => {
       return {...state,
         todos: state.todos
           .map(t => t.id === action.payload.id ? action.payload : t)
+      }
+    case TODO_REMOVE:
+      return {...state,
+        todos: state.todos.filter(t => t.id !== action.payload)
       }
     default:
       return state
